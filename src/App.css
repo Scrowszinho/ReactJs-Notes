@@ -1,4 +1,61 @@
+body{
+  margin: 0px;
+  background-color: #282a36;
+}
+
 .App{
   display: flex;
   flex: 1;
+  flex-direction: column;
+}
+
+.App header{
+  background-color: #44475a;
+  padding: 20px;
+  display: flex;
+  flex: 1;
+}
+
+.App header input {
+  background-color: #282a36;
+  border: none;
+  color:#50fa7b; 
+  height: 20px;
+  width: 200px;
+  border-radius: 10px;
+  padding: 10px;
+  margin: 0px 10px;
+}
+.App header input:nth-child(2){
+flex: 1;
+}
+
+.App header input::placeholder{
+  color:#50fa7b; 
+}
+
+.App header button{
+background-color: #282a36;
+color:#50fa7b; 
+margin: 0px 10px;
+border-radius: 10px;
+height: 40px;
+width: 80px;
+border: none;
+}
+.App header button:active{
+background-color: #353746;
+}
+
+.EmptyCard{
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  justify-items: center;
+  font-size: 40px;
+  font-weight: bold;
+  margin-top: 15pc;
+  color: #f8f8f2;
 }

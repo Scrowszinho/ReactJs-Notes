@@ -1,25 +1,43 @@
-import React, { useState } from 'react';
+import React, { useState, useLayoutEffect, useEffect } from 'react';
 import './App.css';
 import Card from './components/Card';
 
 function App() {
   let localStorage = window.localStorage;
-  const [note, setNote] = useState();
-  const [title, setTitle] = useState();
+  const [note, setNote] = useState('');
+  const [title, setTitle] = useState('');
+  const [notesAll,setNotesAll] = useState(localStorage.getItem('notes'));
+  const [noteIndex,setNoteIndex] = useState();
   const saveNote = () => {
     try {
       if (note && title) {
-        let noteData = { title: title, note: note };
-        localStorage.setItem('notes', JSON.stringify(noteData));
-        console.log(window.localStorage);
-        console.log(window.localStorage.getItem('notes'))
-        setNote();
+        let notes = new Array();
+        if(localStorage.getItem('notes')){
+          notes = JSON.parse(localStorage.getItem('notes'));
+        }
+        notes.push({title:title,note:note});
+        localStorage.setItem('notes',JSON.stringify(notes));
+        setNote('');
+        setTitle('');
+        setNotesAll(localStorage.getItem('notes'));
       } else { }
     } catch {
 
     }
   }
-  const cleanAllNotes = () => localStorage.clear();
+
+  useLayoutEffect(()=>{
+    let notes = new Array();
+    if(localStorage.getItem('notes')){
+      notes = JSON.parse(localStorage.getItem('notes'));
+    }
+    notes.splice(noteIndex);
+    localStorage.setItem('notes',JSON.stringify(notes));
+  },[noteIndex]);
+
+  const cleanAllNotes = () => setNotesAll(localStorage.clear());
+  useLayoutEffect(()=>{
+  },[notesAll]);
   return (
     <div className="App">
       <header>
@@ -33,7 +51,7 @@ function App() {
         <button onClick={cleanAllNotes}>Clear All Notes</button>
       </header>
 
-      <Card item={localStorage} />
+      <Card item={localStorage.getItem('notes')} setNoteIndex={setNoteIndex} />
     </div>
   );
 }
