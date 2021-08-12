@@ -1,4 +1,4 @@
-import React, {useLayoutEffect, useState} from 'react';
+import React from 'react';
 import './Card.css';
 import FlatList from 'flatlist-react'
 import { FaTrash, FaRegFile } from 'react-icons/fa';
@@ -12,20 +12,22 @@ function EmptyCard() {
 }
 
 function Card(props) {
-    const[arrayList, setArrayList] = useState(window.localStorage.getItem('notes'));
     const items = JSON.parse(props.item);
-    const removeItem = (index) =>{
-        let localStorage = window.localStorage;
-        let notes = [];
-        if(localStorage.getItem('notes')){
-          notes = JSON.parse(localStorage.getItem('notes'));
+    const removeItem = (index, item) => {
+        console.log(item)
+        const confirm = window.confirm(`Drop note: ${item.title}`);
+        if (confirm) {
+            let localStorage = window.localStorage;
+            let notes = [];
+            if (localStorage.getItem('notes')) {
+                notes = JSON.parse(localStorage.getItem('notes'));
+            }
+            console.log(index);
+            notes.splice(index, 1);
+            localStorage.setItem('notes', JSON.stringify(notes));
+            props.setChange(1);
         }
-        console.log(index);
-        notes.splice(index,1);
-        localStorage.setItem('notes',JSON.stringify(notes));
-        setArrayList(window.localStorage.getItem('notes'));
     }
-    useLayoutEffect(()=>{},[arrayList])
     return (
         <div className='CardGroup'>
             <FlatList list={items}
@@ -33,7 +35,7 @@ function Card(props) {
                     <div className='Note' key={index} >
                         <h1 className='NoteTitle'>{item.title}</h1>
                         <h2 className='NoteText'>{item.note}</h2>
-                       <FaTrash className='TrashCanIcon'  onClick={()=>removeItem(index)} />
+                        <FaTrash className='TrashCanIcon' onClick={() => removeItem(index, item)} />
                     </div>
                 }
                 renderWhenEmpty={() => <EmptyCard />}

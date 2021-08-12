@@ -20,6 +20,8 @@
     position: relative;
     word-wrap: break-word;
     overflow: auto;
+    transition: 0.3s;
+
 }
 
 .Note .NoteTitle{
