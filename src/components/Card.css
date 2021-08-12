@@ -4,9 +4,6 @@
     flex-direction: row;
     flex-wrap: wrap;
     flex-basis: 100% 3;
-    align-items: center;
-    justify-content: center;
-    justify-items: center;
 }
 
 .Note{
@@ -21,6 +18,8 @@
     font-weight: 100;
     padding: 8px;
     position: relative;
+    word-wrap: break-word;
+    overflow: auto;
 }
 
 .Note .NoteTitle{
@@ -38,7 +37,7 @@
     font-weight: 300;
 }
 
-.Note .TrashCanIcon {
+.TrashCanIcon {
     color: white;
     font-size: 25px;
     position: absolute;
@@ -46,6 +45,6 @@
     right:  5px;
 }
 
-.Note .TrashCanIcon:hover{
+.TrashCanIcon:hover{
     color: #ff5555;
 }
