@@ -30,10 +30,10 @@ persistem no armazenamento local do seu dispositivo.<br />
 # 🏴‍☠️Como utilizar
 
   ```sh
-$ git clone https://github.com/Scrowszinho/CaraOuCoroa
+$ git clone https://github.com/Scrowszinho/ReactJs-Notes/
   ```
 
 ```sh
 $ npm install
-$ expo start
+$ npm start
 ```
